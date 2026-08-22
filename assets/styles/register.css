@@ -1,0 +1,36 @@
+
+.image-section {
+    background: linear-gradient(rgba(13, 71, 161, 0.7), rgba(13, 71, 161, 0.7)), url('../imgs/register.avif') center/cover;
+}
+
+.form-section {
+    flex: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: white;
+    overflow-y: auto;
+}
+
+.logo h2 {
+    font-size: 2rem;
+}
+
+.registration-form {
+    width: 100%;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 1050px) {
+
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}
