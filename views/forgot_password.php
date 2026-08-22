@@ -43,7 +43,7 @@
         <button type="submit" class="login-button">Send Reset Link</button>
 
         <div class="signup-link">
-          <p>Remembered your password? <a href="login.html">Back to Login</a></p>
+          <p>Remembered your password? <a href="login.php">Back to Login</a></p>
         </div>
       </form>
 
