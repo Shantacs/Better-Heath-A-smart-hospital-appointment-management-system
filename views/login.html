@@ -45,15 +45,17 @@
                 <p>Better Health Appointment System</p>
             </div>
 
-            <form class="login-form">
+            <form class="login-form" onsubmit="return validateLogin(event)">
                 <div class="input-group">
-                    <i class="fas fa-user"></i>
-                    <input type="text" placeholder="Email" required>
+                    <img src="../assets/icons/user.svg" alt="icon">
+                    <input name="email" type="text" placeholder="Email">
+                    <span class="error-message" id="email-error"></span>
                 </div>
 
                 <div class="input-group">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" placeholder="Password" required>
+                    <img src="../assets/icons/lock.svg" alt="icon">
+                    <input name="password" type="password" placeholder="Password">
+                    <span class="error-message" id="password-error"></span>
                 </div>
 
                 <div class="remember-forgot">
