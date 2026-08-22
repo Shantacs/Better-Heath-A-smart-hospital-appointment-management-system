@@ -1,3 +1,10 @@
+<?php
+
+session_start();
+$errors = $_SESSION['errors'] ?? [];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,18 +51,18 @@
                 <p>Better Health Appointment System</p>
             </div>
 
-            <form class="registration-form" onsubmit="return validateRegistration(event)">
+            <form class="registration-form" onsubmit="return validateRegistration(event)" action="../controllers/registerController.php" method="POST">
                 <div class="form-row">
                     <div class="input-group">
                         <img src="../assets/icons/user.svg" alt="icon">
                         <input name="fname" type="text" id="firstName" placeholder="Enter your first name">
-                        <span class="error-message" id="fname-error"></span>
+                        <span class="error-message" id="fname-error"><?php echo $errors['fname'] ?? ''; ?></span>
                     </div>
 
                     <div class="input-group">
                         <img src="../assets/icons/user.svg" alt="icon">
                         <input name="lname" type="text" id="lastName" placeholder="Enter your last name">
-                        <span class="error-message" id="lname-error"></span>
+                        <span class="error-message" id="lname-error"><?php echo $errors['lname'] ?? ''; ?></span>
                     </div>
                 </div>
 
@@ -63,7 +70,7 @@
                     <div class="input-group">
                         <img src="../assets/icons/mail-blue.svg" alt="icon">
                         <input name="email" type="email" id="email" placeholder="Enter your email address">
-                        <span class="error-message" id="email-error"></span>
+                        <span class="error-message" id="email-error"><?php echo $errors['email'] ?? ''; ?></span>
                     </div>
                 </div>
 
@@ -71,14 +78,14 @@
                     <div class="input-group">
                         <img src="../assets/icons/lock.svg" alt="icon">
                         <input name="password" type="password" id="password" placeholder="Create a password">
-                        <span class="error-message" id="password-error"></span>
+                        <span class="error-message" id="password-error"><?php echo $errors['password'] ?? ''; ?></span>
                     </div>
 
                     <div class="input-group">
                         <img src="../assets/icons/lock.svg" alt="icon">
                         <input name="confirmPassword" type="password" id="confirmPassword"
                             placeholder="Confirm your password">
-                        <span class="error-message" id="confirmPassword-error"></span>
+                        <span class="error-message" id="confirmPassword-error"><?php echo $errors['confirmPassword'] ?? ''; ?></span>
                     </div>
                 </div>
 
@@ -87,7 +94,7 @@
                         <label for="dob">Date of Birth</label>
                         <img src="../assets/icons/calendar-blue.svg" alt="icon">
                         <input name="dob" type="date" id="dob">
-                        <span class="error-message" id="dob-error"></span>
+                        <span class="error-message" id="dob-error"><?php echo $errors['dob'] ?? ''; ?></span>
                     </div>
 
                     <div class="input-group">
@@ -99,15 +106,16 @@
                             <option value="female">Female</option>
                             <option value="other">Other</option>
                         </select>
-                        <span class="error-message" id="gender-error"></span>
+                        <span class="error-message" id="gender-error"><?php echo $errors['gender'] ?? ''; ?></span>
                     </div>
                 </div>
 
 
                 <button type="submit" class="register-button">Create Account</button>
+                <span class="error-message" id="registration-error"><?php echo $errors['registration'] ?? ''; ?></span>
 
                 <div class="login-link">
-                    Already have an account? <a href="./login.html">Log in</a>
+                    Already have an account? <a href="./login.php">Log in</a>
                 </div>
             </form>
         </div>
