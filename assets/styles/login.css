@@ -13,4 +13,12 @@
 .remember-forgot a {
     color: #1a75bc;
     text-decoration: none;
+    padding-left: 2.8rem;
+}
+
+#login-error {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding-top: 0.5rem;
 }

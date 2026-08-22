@@ -10,7 +10,7 @@
 
 .image-section {
     flex: 1;
-    background: linear-gradient(rgba(13, 71, 161, 0.7), rgba(13, 71, 161, 0.7)), url('../imgs/login.avif') center/cover;
+    /* background: linear-gradient(rgba(13, 71, 161, 0.7), rgba(13, 71, 161, 0.7)), url('../imgs/login.avif') center/cover; */
     color: white;
     padding: 6rem;
     display: flex;
@@ -46,14 +46,14 @@
 }
 
 .features .feature-icon {
-  width: 30px;
-  height: 30px;
-  margin-right: 10px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2); 
-  padding: 6px; 
-  object-fit: contain;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 6px;
+    object-fit: contain;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .login-section {
@@ -95,8 +95,9 @@
     flex: 1;
 }
 
-.input-group i {
+.input-group img {
     position: absolute;
+    width: 1.3rem;
     left: 15px;
     top: 50%;
     transform: translateY(-50%);
@@ -115,7 +116,7 @@
 
 .input-group input:focus,
 .input-group select:focus {
-    border-color: #1a75bc;
+    border-color: rgb(26, 117, 188);
     box-shadow: 0 0 0 2px rgba(26, 117, 188, 0.2);
     outline: none;
 }
@@ -157,7 +158,8 @@
     text-decoration: underline;
 }
 
-.login-button, .register-button {
+.login-button,
+.register-button {
     width: 100%;
     padding: 15px;
     background: #1a75bc;
@@ -170,25 +172,36 @@
     transition: background 0.3s;
 }
 
-.login-button:hover, .register-button:hover {
+.login-button:hover,
+.register-button:hover {
     background: #0d47a1;
 }
 
-.signup-link, .login-link {
+.signup-link,
+.login-link {
     margin-top: 1.5rem;
     text-align: center;
     font-size: 1rem;
     color: #555;
 }
 
-.signup-link a, .login-link a {
+.signup-link a,
+.login-link a {
     color: #1a75bc;
     text-decoration: none;
     font-weight: 600;
 }
 
-.signup-link a:hover, .login-link a:hover {
+.signup-link a:hover,
+.login-link a:hover {
     text-decoration: underline;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    padding-left: 2.5rem;
+    padding-top: 8px;
 }
 
 @media (max-width: 950px) {
@@ -204,7 +217,8 @@
         padding: 30px;
     }
 
-    .login-section, .form-section {
+    .login-section,
+    .form-section {
         order: 1;
         padding: 30px;
     }
