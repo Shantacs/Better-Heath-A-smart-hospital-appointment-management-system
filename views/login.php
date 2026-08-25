@@ -65,6 +65,7 @@ $errors = $_SESSION['errors'] ?? [];
                     <input name="password" type="password" placeholder="Password">
                     <span class="error-message" id="password-error"><?php echo $errors['password'] ?? ''; ?></span>
                 </div>
+                
 
                 <div class="remember-forgot">
                     <!-- <label>
