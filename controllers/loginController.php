@@ -37,7 +37,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if ($result["success"]) {
             $_SESSION['errors'] = [];
             $_SESSION['user'] = $result["user"];
-            header("Location: ../views/dashboard.php");
+            if ($result["user"]['role'] === 'admin') {
+                header("Location: ../views/admin/admin_layout.php");
+            } else if ($result["user"]['role'] === 'doctor') {
+                header("Location: ../views/doctor/doctor_layout.php");
+            } else if ($result["user"]['role'] === 'patient') {
+                header("Location: ../views/patient/patient_layout.php");
+            }
         } else {
             $_SESSION['errors']['login'] = $result["error"];
             header("Location: ../views/login.php");
