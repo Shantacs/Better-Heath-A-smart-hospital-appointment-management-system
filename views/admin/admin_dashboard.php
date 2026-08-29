@@ -106,7 +106,7 @@ $recent_appointments = [
                 <img src="../../assets/icons/user-plus.svg" alt="Add User">
             </div>
             <h3>Add New User</h3>
-            <p>Create new staff or patient accounts</p>
+            <p>Create staff, accountant, or patient accounts</p>
         </a>
 
         <a href="?page=manage_reports" class="action-card">
