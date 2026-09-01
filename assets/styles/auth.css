@@ -203,23 +203,3 @@
     padding-left: 2.5rem;
     padding-top: 8px;
 }
-
-@media (max-width: 950px) {
-    .container {
-        flex-direction: column;
-        height: auto;
-        width: 100%;
-        max-width: 500px;
-    }
-
-    .image-section {
-        order: 2;
-        padding: 30px;
-    }
-
-    .login-section,
-    .form-section {
-        order: 1;
-        padding: 30px;
-    }
-}

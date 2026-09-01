@@ -1,0 +1,38 @@
+
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+.status-pending {
+  background: #fff3cd;
+  color: #856404;
+}
+.status-confirmed {
+  background: #d4edda;
+  color: #155724;
+}
+.status-completed {
+  background: #cce5ff;
+  color: #004085;
+}
+.status-cancelled {
+  background: #f8d7da;
+  color: #721c24;
+}
+.btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+.btn-remove {
+  background: #dc3545;
+  color: white;
+}
+.btn-remove:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+

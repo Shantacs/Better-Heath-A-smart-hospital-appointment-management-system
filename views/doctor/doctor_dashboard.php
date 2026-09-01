@@ -5,22 +5,11 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'doctor') {
     exit();
 }
 
-// Sample data for demonstration with
-$stats = [
-    'today_appointments' => 14,
-    'total_patients' => 327,
-    'pending_prescriptions' => 8,
-    'completed_appointments' => 1246
-];
+include_once "../../controllers/dashboardController.php";
+$doctorStats = doctorDashboard($_SESSION['user']['user_id']);
+$todays_appointments = $doctorStats['todays_appointments'];
 
-// Today's appointments sample data
-$todays_appointments = [
-    ['id' => 'A-10251', 'patient' => 'Abdul Rahman', 'time' => '9:00 AM', 'status' => 'completed', 'condition' => 'Fever'],
-    ['id' => 'A-10252', 'patient' => 'Fatima Begum', 'time' => '10:30 AM', 'status' => 'upcoming', 'condition' => 'Diabetes Checkup'],
-    ['id' => 'A-10253', 'patient' => 'Mohammad Ali', 'time' => '11:15 AM', 'status' => 'upcoming', 'condition' => 'Hypertension'],
-    ['id' => 'A-10254', 'patient' => 'Ayesha Akter', 'time' => '2:00 PM', 'status' => 'upcoming', 'condition' => 'Pregnancy Checkup'],
-    ['id' => 'A-10255', 'patient' => 'Kamal Hossain', 'time' => '3:30 PM', 'status' => 'upcoming', 'condition' => 'Back Pain']
-];
+$stats = $doctorStats['stats'];
 
 ?>
 
@@ -76,10 +65,10 @@ $todays_appointments = [
         <tbody>
             <?php foreach ($todays_appointments as $appointment): ?>
             <tr>
-                <td><?php echo $appointment['id']; ?></td>
+                <td><?php echo $appointment['appointment_code']; ?></td>
                 <td><?php echo $appointment['patient']; ?></td>
-                <td><?php echo $appointment['time']; ?></td>
-                <td><?php echo $appointment['condition']; ?></td>
+                <td><?php echo $appointment['scheduled_datetime']; ?></td>
+                <td><?php echo $appointment['patient_condition']; ?></td>
                 <td>
                     <span class="status-badge status-<?php echo $appointment['status']; ?>">
                         <?php echo ucfirst($appointment['status']); ?>

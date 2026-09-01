@@ -12,13 +12,13 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'doctor') {
 
 // default values
 $weekly_schedule = [
-    'sunday' => ['start' => '', 'end' => '', 'available' => false],
-    'monday' => ['start' => '', 'end' => '', 'available' => false],
-    'tuesday' => ['start' => '', 'end' => '', 'available' => false],
-    'wednesday' => ['start' => '', 'end' => '', 'available' => false],
-    'thursday' => ['start' => '', 'end' => '', 'available' => false],
-    'friday' => ['start' => '', 'end' => '', 'available' => false],
-    'saturday' => ['start' => '', 'end' => '', 'available' => false]
+    'sunday' => ['start' => '09:00', 'end' => '17:00', 'available' => false],
+    'monday' => ['start' => '09:00', 'end' => '17:00', 'available' => false],
+    'tuesday' => ['start' => '09:00', 'end' => '17:00', 'available' => false],
+    'wednesday' => ['start' => '09:00', 'end' => '17:00', 'available' => false],
+    'thursday' => ['start' => '09:00', 'end' => '17:00', 'available' => false],
+    'friday' => ['start' => '09:00', 'end' => '17:00', 'available' => false],
+    'saturday' => ['start' => '09:00', 'end' => '17:00', 'available' => false]
 ];
 ?>
 
@@ -59,17 +59,20 @@ $weekly_schedule = [
                                 <label>Start Time</label>
                                 <input type="time" class="form-control" name="start_time[<?php echo $day; ?>]"
                                     value="<?php echo $schedule['start']; ?>"
-                                    <?php echo $schedule['available'] ? '' : 'disabled'; ?>>
+                                    <?php echo $schedule['available'] ? '' : 'disabled'; ?>
+                                    default="09:00">
                             </div>
 
                             <div class="form-group">
                                 <label>End Time</label>
                                 <input type="time" class="form-control" name="end_time[<?php echo $day; ?>]"
                                     value="<?php echo $schedule['end']; ?>"
-                                    <?php echo $schedule['available'] ? '' : 'disabled'; ?>>
+                                    <?php echo $schedule['available'] ? '' : 'disabled'; ?>
+                                    default="17:00">
                             </div>
                         </div>
                     </div>
+
                 <?php endforeach; ?>
             </div>
 

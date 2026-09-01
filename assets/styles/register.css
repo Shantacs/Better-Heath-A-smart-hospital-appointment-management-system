@@ -39,11 +39,3 @@ input[type='date'], .gender-icon {
     padding-top: 0.5rem;
 }
 
-
-@media (max-width: 1050px) {
-
-    .form-row {
-        flex-direction: column;
-        gap: 0;
-    }
-}

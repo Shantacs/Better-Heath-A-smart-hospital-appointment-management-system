@@ -1,0 +1,66 @@
+.status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.status-active {
+    background-color: #d4f5dd;
+    color: #1a7f37;
+    border: 1px solid #1a7f37;
+}
+
+.status-banned {
+    background-color: #fde2e2;
+    color: #b91c1c;
+    border: 1px solid #b91c1c;
+}
+
+/* Buttons */
+.btn-ban {
+    background-color: #b91c1c;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background 0.2s ease;
+}
+.btn-ban:hover {
+    background-color: #991b1b;
+}
+
+.btn-unban {
+    background-color: #1a7f37;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background 0.2s ease;
+}
+.btn-unban:hover {
+    background-color: #166534;
+}
+
+.btn-remove {
+    background-color: #dc2626;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background 0.2s ease;
+}
+.btn-remove:hover {
+    background-color: #b91c1c;
+}

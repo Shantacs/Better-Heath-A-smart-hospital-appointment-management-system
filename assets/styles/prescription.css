@@ -1,0 +1,49 @@
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 6px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+h1 {
+    color: #1a75bc;
+    margin-bottom: 10px;
+}
+
+p {
+    margin-bottom: 20px;
+}
+
+.prescriptions-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.prescriptions-table th, .prescriptions-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.prescriptions-table th {
+    background-color: #1a75bc;
+    color: white;
+}
+
+.prescriptions-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.prescriptions-table tr:hover {
+    background-color: #e6f0fa;
+}
+
+.empty {
+    text-align: center;
+    color: #777;
+    font-style: italic;
+    margin-top: 20px;
+}
