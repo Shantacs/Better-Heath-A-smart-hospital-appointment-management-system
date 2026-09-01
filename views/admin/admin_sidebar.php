@@ -28,9 +28,9 @@ $currentPage = isset($_GET['page']) ? $_GET['page'] : 'admin_dashboard';
             </a>
         </li>
         <li>
-            <a href="?page=manage_reports" class="nav-link <?php echo $currentPage === 'manage_reports' ? 'active' : ''; ?>">
-                <img src="../../assets/icons/reports.svg" alt="Manage Reports">
-                <span>Manage Reports</span>
+            <a href="?page=manage_doctors" class="nav-link <?php echo $currentPage === 'manage_doctors' ? 'active' : ''; ?>">
+                <img src="../../assets/icons/hospital.svg" alt="Manage Doctors">
+                <span>Manage Doctors Departments</span>
             </a>
         </li>
         <li>

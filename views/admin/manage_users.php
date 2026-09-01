@@ -1,65 +1,101 @@
 <?php
-if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
+if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'admin') {
     header("Location: ../login.php");
     exit();
 }
 
-require_once "../../models/UserModel.php";
-$userModel = new UserModel();
-$users = $userModel->getUsers();
-$message = $_SESSION['accountant_message'] ?? '';
-unset($_SESSION['accountant_message']);
-$error = $_SESSION['errors']['accountant'] ?? '';
-unset($_SESSION['errors']['accountant']);
+$user = $_SESSION['user'];
+$pageTitle = "Manage Users";
+
+include '../../controllers/getusersController.php';
+
+$users = getAllUsers();
+
+
 ?>
+
+<link rel="stylesheet" href="../../assets/styles/manage_users.css">
 
 <div class="dashboard-header">
     <h1>Manage Users</h1>
-    <p>Create and manage hospital users, including accountant accounts.</p>
+    <p>Manage doctors, patients, and admins</p>
 </div>
-
-<?php if ($message): ?>
-    <div class="accountant-note"><?php echo htmlspecialchars($message); ?></div><br>
-<?php endif; ?>
-<?php if ($error): ?>
-    <div class="error-message" style="display:block;"><?php echo htmlspecialchars($error); ?></div><br>
-<?php endif; ?>
-
 <div class="dashboard-section">
-    <h2>Create Accountant Account</h2>
-    <form method="POST" action="../../controllers/createAccountantController.php" class="accountant-form">
-        <div class="form-grid">
-            <div><label>First Name</label><input type="text" name="fname" required></div>
-            <div><label>Last Name</label><input type="text" name="lname" required></div>
-            <div><label>Email</label><input type="email" name="email" required></div>
-            <div><label>Password</label><input type="password" name="password" minlength="8" required></div>
-            <div><label>Date of Birth</label><input type="date" name="dob" required></div>
-            <div><label>Gender</label>
-                <select name="gender" required>
-                    <option value="">Select gender</option>
-                    <option value="male">Male</option><option value="female">Female</option><option value="other">Other</option>
-                </select>
-            </div>
-        </div>
-        <button class="btn btn-primary" type="submit">Create Accountant</button>
-    </form>
+    <!-- Filters -->
+    <div class="filters" style="display:flex; gap:15px; margin-bottom:20px;">
+        <select id="roleFilter" class="form-control" style="width:200px;">
+            <option value="all">All Users</option>
+            <option value="doctor">Doctors</option>
+            <option value="patient">Patients</option>
+            <option value="admin">Admins</option>
+        </select>
+
+        <input type="text" id="userSearch" placeholder="Search by name or email..." class="form-control" style="flex:1;">
+    </div>
+    
+
+    <!-- Users Table -->
+    <div class="table-container">
+        <table class="users-table appointments-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>DOB</th>
+                    <th>Gender</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Joined</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="usersTableBody">
+                <?php foreach ($users as $u): ?>
+                    <tr data-role="<?php echo $u['role']; ?>">
+                        <td><?php echo $u['user_id']; ?></td>
+                        <td><?php echo htmlspecialchars($u['first_name'] . " " . $u['last_name']); ?></td>
+                        <td><?php echo htmlspecialchars($u['email']); ?></td>
+                        <td><?php echo htmlspecialchars($u['dob']); ?></td>
+                        <td><?php echo htmlspecialchars($u['gender']); ?></td>
+                        <td>
+                            <select class="role-dropdown form-control" data-user-id="<?php echo $u['user_id']; ?>"
+                                <?php echo ($u['user_id'] == $_SESSION['user']['user_id']) ? 'disabled' : ''; ?>>
+                                <option value="doctor" <?php echo $u['role'] === 'doctor' ? 'selected' : ''; ?>>Doctor</option>
+                                <option value="patient" <?php echo $u['role'] === 'patient' ? 'selected' : ''; ?>>Patient</option>
+                                <option value="admin" <?php echo $u['role'] === 'admin' ? 'selected' : ''; ?>>Admin</option>
+                            </select>
+                        </td>
+                        <td>
+                            <span class="status-badge status-<?php echo $u['is_banned'] ? 'banned' : 'active'; ?>">
+                                <?php echo ucfirst($u['is_banned'] ? 'Banned' : 'Active'); ?>
+                            </span>
+                        </td>
+                        <td><?php echo date('M j, Y', strtotime($u['created_at'])); ?></td>
+                        <td>
+                            <div class="user-actions" style="display:flex; gap:8px;">
+                                <?php if ($u['user_id'] != $_SESSION['user']['user_id']): ?>
+                                    <button class="btn btn-secondary btn-sm btn-ban"
+                                        data-user-id="<?php echo $u['user_id']; ?>"
+                                        data-status="<?php echo $u['is_banned'] ? 1 : 0; ?>">
+                                        <?php echo $u['is_banned'] ? 'Unban' : 'Ban'; ?>
+                                    </button>
+                                    
+                                    <button class="btn btn-danger btn-sm btn-remove"
+                                        data-user-id="<?php echo $u['user_id']; ?>"
+                                        data-name="<?php echo htmlspecialchars($u['first_name']); ?>">
+                                        Delete
+                                    </button>
+                                <?php endif; ?>
+                            </div>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+
+        </table>
+    </div>
 </div>
 
-<div class="dashboard-section">
-    <h2>Registered Users</h2>
-    <table class="appointments-table">
-        <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Date of Birth</th><th>Gender</th><th>Role</th></tr></thead>
-        <tbody>
-        <?php foreach ($users as $account): ?>
-            <tr>
-                <td><?php echo (int)$account['user_id']; ?></td>
-                <td><?php echo htmlspecialchars($account['first_name'].' '.$account['last_name']); ?></td>
-                <td><?php echo htmlspecialchars($account['email']); ?></td>
-                <td><?php echo htmlspecialchars($account['dob']); ?></td>
-                <td><?php echo ucfirst(htmlspecialchars($account['gender'])); ?></td>
-                <td><span class="status-badge status-<?php echo htmlspecialchars($account['role']); ?>"><?php echo ucfirst(htmlspecialchars($account['role'])); ?></span></td>
-            </tr>
-        <?php endforeach; ?>
-        </tbody>
-    </table>
-</div>
+
+<script src="../../assets/scripts/manage_users.js"></script>

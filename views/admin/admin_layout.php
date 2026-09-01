@@ -8,7 +8,6 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'admin') {
 $user = $_SESSION['user'];
 $pageTitle = "Admin Dashboard";
 
-// Determine current page for active navigation
 $currentPage = isset($_GET['page']) ? $_GET['page'] : 'admin_dashboard';
 ?>
 

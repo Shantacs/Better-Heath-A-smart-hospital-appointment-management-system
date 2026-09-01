@@ -5,25 +5,13 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'admin') {
     exit();
 }
 
-// Sample data for demonstration
-$stats = [
-    'total_appointments' => 1247,
-    'total_patients' => 856,
-    'total_doctors' => 42,
-    'completed_appointments' => 983,
-    'upcoming_appointments' => 264,
-    'cancelled_appointments' => 42
-];
+include_once "../../controllers/dashboardController.php";
+$adminStats = adminDashboard();
 
-// Recent appointments sample data
-$recent_appointments = [
-    ['id' => 'A-10245', 'patient' => 'Abdul Rahman', 'doctor' => 'Dr. Ahmed Hussain', 'date' => '2023-11-15', 'time' => '10:30 AM', 'status' => 'completed'],
-    ['id' => 'A-10246', 'patient' => 'Fatima Begum', 'doctor' => 'Dr. Salma Khan', 'date' => '2023-11-16', 'time' => '2:15 PM', 'status' => 'upcoming'],
-    ['id' => 'A-10247', 'patient' => 'Mohammad Ali', 'doctor' => 'Dr. Jamal Uddin', 'date' => '2023-11-16', 'time' => '9:00 AM', 'status' => 'upcoming'],
-    ['id' => 'A-10248', 'patient' => 'Ayesha Akter', 'doctor' => 'Dr. Nusrat Jahan', 'date' => '2023-11-14', 'time' => '4:45 PM', 'status' => 'completed'],
-    ['id' => 'A-10249', 'patient' => 'Kamal Hossain', 'doctor' => 'Dr. Rajib Hasan', 'date' => '2023-11-17', 'time' => '11:00 AM', 'status' => 'confirmed'],
-    
-];
+$stats = $adminStats['stats'];
+$recent_appointments = $adminStats['recent_appointments'];
+
+
 ?>
 
 <div class="dashboard-header">
@@ -61,16 +49,6 @@ $recent_appointments = [
             <p>Medical Doctors</p>
         </div>
     </div>
-    
-    <div class="stat-card">
-        <div class="stat-icon">
-            <img src="../../assets/icons/calendar-times.svg" alt="Cancelled Appointments">
-        </div>
-        <div class="stat-info">
-            <h3><?php echo $stats['cancelled_appointments']; ?></h3>
-            <p>Cancelled Appointments</p>
-        </div>
-    </div>
 </div>
 
 <div class="dashboard-section">
@@ -87,7 +65,7 @@ $recent_appointments = [
         </div>
         
         <div class="stat-card">
-            <div class="stat-icon" style="background-color: #fff8e1;">
+            <div class="stat-icon" style="background-color: #e8f5e9;">
                 <img src="../../assets/icons/calendar-blue.svg" alt="Upcoming Appointments">
             </div>
             <div class="stat-info">
@@ -105,16 +83,16 @@ $recent_appointments = [
             <div class="action-icon">
                 <img src="../../assets/icons/user-plus.svg" alt="Add User">
             </div>
-            <h3>Add New User</h3>
-            <p>Create staff, accountant, or patient accounts</p>
+            <h3>Manage Users</h3>
+            <p>Create new staff or patient accounts</p>
         </a>
 
         <a href="?page=manage_reports" class="action-card">
             <div class="action-icon">
                 <img src="../../assets/icons/chart-bar.svg" alt="Manage Reports">
             </div>
-            <h3>Manage Reports</h3>
-            <p>Manage feedbacks and reports</p>
+            <h3>Manage Departments</h3>
+            <p>Manage departments and doctors</p>
         </a>
         
         <a href="?page=manage_users" class="action-card">
@@ -127,7 +105,7 @@ $recent_appointments = [
     </div>
 </div>
 
-<div class="dashboard-section">
+<!-- <div class="dashboard-section">
     <h2>Recent Appointments</h2>
     <table class="appointments-table">
         <thead>
@@ -136,18 +114,16 @@ $recent_appointments = [
                 <th>Patient</th>
                 <th>Doctor</th>
                 <th>Date</th>
-                <th>Time</th>
                 <th>Status</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($recent_appointments as $appointment): ?>
             <tr>
-                <td><?php echo $appointment['id']; ?></td>
+                <td><?php echo $appointment['appointment_code']; ?></td>
                 <td><?php echo $appointment['patient']; ?></td>
                 <td><?php echo $appointment['doctor']; ?></td>
-                <td><?php echo $appointment['date']; ?></td>
-                <td><?php echo $appointment['time']; ?></td>
+                <td><?php echo $appointment['scheduled_datetime']; ?></td>
                 <td>
                     <span class="status-badge status-<?php echo $appointment['status']; ?>">
                         <?php echo ucfirst($appointment['status']); ?>
@@ -157,4 +133,4 @@ $recent_appointments = [
             <?php endforeach; ?>
         </tbody>
     </table>
-</div>
+</div> -->
