@@ -9,7 +9,7 @@ $user = $_SESSION['user'];
 $pageTitle = "Patient Dashboard";
 
 // Determine current page for active navigation
-$currentPage = isset($_GET['page']) ? $_GET['page'] : 'patient_dashboard';
+// $currentPage = isset($_GET['page']) ? $_GET['page'] : 'patient_dashboard';
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +46,9 @@ $currentPage = isset($_GET['page']) ? $_GET['page'] : 'patient_dashboard';
             }
             ?>
         </div>
+        
     </div>
+    <?php include '../footer.php'; ?>
 </body>
 
 </html>

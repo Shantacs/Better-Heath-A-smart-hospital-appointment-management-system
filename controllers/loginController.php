@@ -34,6 +34,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $data['password']
         );
 
+        if($result['user']['is_banned']) {
+            $_SESSION['errors']['login'] = "Your account has been banned. Please contact support.";
+            header("Location: ../views/login.php");
+            exit();
+        }
+
         if ($result["success"]) {
             $_SESSION['errors'] = [];
             $_SESSION['user'] = $result["user"];

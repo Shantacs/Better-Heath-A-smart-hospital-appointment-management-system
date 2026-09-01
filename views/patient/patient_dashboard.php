@@ -5,26 +5,11 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'patient') {
     exit();
 }
 
-// Sample data for demonstration with Bangladeshi context
-$stats = [
-    'upcoming_appointments' => 2,
-    'completed_appointments' => 8,
-    'active_prescriptions' => 3,
-    'doctors_visited' => 4
-];
+include_once "../../controllers/dashboardController.php";
+$patientStats = patientDashboard($_SESSION['user']['user_id']);
+$upcoming_appointments = $patientStats['upcoming_appointments_list'];
 
-// Upcoming appointments sample data with Bangladeshi doctors
-$upcoming_appointments = [
-    ['id' => 'A-10256', 'doctor' => 'Dr. Ahmed Rahman', 'specialty' => 'Cardiology', 'date' => '2023-11-18', 'time' => '10:00 AM', 'status' => 'confirmed'],
-    ['id' => 'A-10257', 'doctor' => 'Dr. Fatima Jahan', 'specialty' => 'Gynecology', 'date' => '2023-11-20', 'time' => '3:30 PM', 'status' => 'confirmed']
-];
-
-// Recent prescriptions sample data
-$recent_prescriptions = [
-    ['id' => 'RX-0451', 'doctor' => 'Dr. Kamal Hossain', 'date' => '2023-11-10', 'medicines' => 4, 'status' => 'active'],
-    ['id' => 'RX-0448', 'doctor' => 'Dr. Salma Akter', 'date' => '2023-10-28', 'medicines' => 3, 'status' => 'completed'],
-    ['id' => 'RX-0442', 'doctor' => 'Dr. Abdul Malik', 'date' => '2023-10-15', 'medicines' => 2, 'status' => 'completed']
-];
+$stats = $patientStats['stats'];
 
 ?>
 
@@ -40,7 +25,7 @@ $recent_prescriptions = [
         </div>
         <div class="stat-info">
             <h3><?php echo $stats['upcoming_appointments']; ?></h3>
-            <p>Upcoming Appointments</p>
+            <p>Pending Appointments</p>
         </div>
     </div>
     
@@ -85,18 +70,16 @@ $recent_prescriptions = [
                 <th>Doctor</th>
                 <th>Specialty</th>
                 <th>Date</th>
-                <th>Time</th>
                 <th>Status</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($upcoming_appointments as $appointment): ?>
             <tr>
-                <td><?php echo $appointment['id']; ?></td>
+                <td><?php echo $appointment['appointment_code']; ?></td>
                 <td><?php echo $appointment['doctor']; ?></td>
                 <td><?php echo $appointment['specialty']; ?></td>
-                <td><?php echo $appointment['date']; ?></td>
-                <td><?php echo $appointment['time']; ?></td>
+                <td><?php echo $appointment['requested_datetime']; ?></td>
                 <td>
                     <span class="status-badge status-<?php echo $appointment['status']; ?>">
                         <?php echo ucfirst($appointment['status']); ?>
@@ -138,38 +121,4 @@ $recent_prescriptions = [
             <p>View your medication history</p>
         </a>
     </div>
-</div>
-
-<div class="dashboard-section">
-    <h2>Recent Prescriptions</h2>
-    <?php if (count($recent_prescriptions) > 0): ?>
-    <table class="appointments-table">
-        <thead>
-            <tr>
-                <th>Prescription ID</th>
-                <th>Doctor</th>
-                <th>Date</th>
-                <th>Medicines</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($recent_prescriptions as $prescription): ?>
-            <tr>
-                <td><?php echo $prescription['id']; ?></td>
-                <td><?php echo $prescription['doctor']; ?></td>
-                <td><?php echo $prescription['date']; ?></td>
-                <td><?php echo $prescription['medicines']; ?> medicines</td>
-                <td>
-                    <span class="status-badge status-<?php echo $prescription['status']; ?>">
-                        <?php echo ucfirst($prescription['status']); ?>
-                    </span>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <?php else: ?>
-    <p>You don't have any prescriptions yet.</p>
-    <?php endif; ?>
 </div>
