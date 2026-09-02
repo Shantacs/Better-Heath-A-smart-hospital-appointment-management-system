@@ -11,6 +11,7 @@ $doctors = getAllDoctors();
 $user = $_SESSION['user'];
 ?>
 
+
 <div class="dashboard-header">
     <h1>Find Doctors</h1>
     <p>Browse available doctors and book your appointments.</p>
